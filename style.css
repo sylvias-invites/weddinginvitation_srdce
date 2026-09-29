@@ -15,24 +15,33 @@
     padding: 0;
 }
 
+/* Zajistí, že kořenový prvek i body pokrývají 100 % výšky displeje */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+    min-height: -webkit-fill-available; /* Pro iOS Safari */
+    min-height: 100dvh; /* Moderní jednotka (Dynamic Viewport Height) pro mobily */
+}
+
 body {
     background-color: var(--bg-color);
     
-    /* Načtení tvého vlastního obrázku se třpytkami */
+    /* Načtení pozadí */
     background-image: url('pozadi.png');
-    
-    /* Nastavení opakování a pokrytí pozadí */
     background-repeat: repeat;
     background-position: center top;
-    background-size: auto; /* Případně 'cover', pokud nechceš, aby se obrázek opakoval */
-    background-attachment: fixed; /* Pozadí zůstane při skrolování pevně na místě */
+    
+    /* Změna pro mobily: 'scroll' místo 'fixed' zabrání ořezání na mobilech */
+    background-attachment: scroll; 
+    background-size: cover; 
     
     color: var(--text-color);
     font-family: var(--font-body);
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
     text-align: center;
     overflow-x: hidden;
 }
