@@ -28,7 +28,6 @@ heartImg.onerror = () => {
 function initCanvas() {
     // Načte přesné aktuální rozměry kontejneru z obrazovky
     const w = container ? container.offsetWidth : 320;
-    // Pokud container neexistuje, použijeme 320 (stejně jako u šířky), aby z toho byl čtverec
     const h = container ? container.offsetHeight : 320; 
     const dpr = window.devicePixelRatio || 1;
 
@@ -40,19 +39,38 @@ function initCanvas() {
     ctx.scale(dpr, dpr);
 
     if (heartImg.complete && heartImg.naturalWidth !== 0) {
-        // 1. Vytvoření zlatého podkladu v paměti
+        // --- VÝPOČET ZACHOVÁNÍ POMĚRU STRAN (PROPORCÍ) ---
+        const imgRatio = heartImg.naturalWidth / heartImg.naturalHeight;
+        const containerRatio = w / h;
+
+        let drawWidth, drawHeight, offsetX, offsetY;
+
+        if (imgRatio > containerRatio) {
+            drawWidth = w;
+            drawHeight = w / imgRatio;
+            offsetX = 0;
+            offsetY = (h - drawHeight) / 2;
+        } else {
+            drawHeight = h;
+            drawWidth = h * imgRatio;
+            offsetX = (w - drawWidth) / 2;
+            offsetY = 0;
+        }
+
+        // 1. Vytvoření zlatého/růžového podkladu v paměti
         const goldCanvas = document.createElement("canvas");
         goldCanvas.width = canvas.width;
         goldCanvas.height = canvas.height;
         const gCtx = goldCanvas.getContext("2d");
         gCtx.scale(dpr, dpr);
 
-        gCtx.drawImage(heartImg, 0, 0, w, h);
+        // Vykreslení srdce se správným poměrem stran
+        gCtx.drawImage(heartImg, offsetX, offsetY, drawWidth, drawHeight);
         gCtx.globalCompositeOperation = "source-in";
         gCtx.fillStyle = "#ffe7eb";
         gCtx.fillRect(0, 0, w, h);
 
-        // 2. Nastavení zlatého podkladu pro text
+        // 2. Nastavení podkladu pro text
         const revealText = document.querySelector(".reveal-text");
         if (revealText) {
             revealText.style.backgroundImage = `url(${goldCanvas.toDataURL()})`;
@@ -61,8 +79,9 @@ function initCanvas() {
             revealText.style.backgroundPosition = "center";
         }
 
-        // 3. Vykreslení stírací vrstvy (růží)
-        ctx.drawImage(heartImg, 0, 0, w, h);
+        // 3. Vykreslení stírací vrstvy na plátno se správným poměrem stran
+        ctx.clearRect(0, 0, w, h);
+        ctx.drawImage(heartImg, offsetX, offsetY, drawWidth, drawHeight);
     }
 }
 
