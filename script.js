@@ -170,16 +170,6 @@ function revealEverything() {
     if (hasRevealed) return;
     hasRevealed = true;
 
-    // Schování textu nad srdíčkem
-
-    const mainTitle = document.getElementById("main-title");
-    
-    if (mainTitle) {
-
-        mainTitle.style.transition = "opacity 0.6s ease";
-
-        mainTitle.style.opacity = "0";
-    }
 
     // 2. Spuštění trvajících konfet (např. po dobu 3 sekund)
     if (typeof confetti === "function") {
@@ -211,8 +201,8 @@ function revealEverything() {
                 particleCount: 12,
                 spread: 60,
                 origin: { x: 0.8, y: 0.6 }, // Výstřel zprava
-                colors: ['#cb7f8c', '#ffdce2', '#5B7065', '#ffffff'],
-                shapes: ['heart', diamond],
+                colors: ['#c0eeff', '#cdd6d5', '#749483', '#ffffff'],
+                shapes: ['heart'],
                 scalar: 1.2
             });
         }, 200); // Každých 200 ms vyletí nová vlna
