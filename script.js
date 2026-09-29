@@ -226,7 +226,15 @@ function revealEverything() {
         instruction.style.opacity = "0";
     }
 
-    // 3. Zobrazení tlačítka
+    // 3. Zobrazení tlačítka next btn
+    setTimeout(() => {
+        canvas.style.display = "none";
+        if (calendarBtn) {
+            calendarBtn.classList.add("visible");
+        }
+    }, 800);
+
+     // 4. Zobrazení tlačítka calendar
     setTimeout(() => {
         canvas.style.display = "none";
         if (nextBtn) {
