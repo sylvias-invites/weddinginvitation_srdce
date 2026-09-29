@@ -69,6 +69,14 @@ body {
     transition: opacity 0.6s ease;
 }
 
+.initials {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: black;
+    margin-top: 0; /* Mezera od srdíčka */
+    margin-bottom: 0; /* Přitáhne nápis "Setři srdíčko" blíž k iniciálám */
+}
+
 /* Kontejner pro srdíčko */
 .heart-container {
     position: relative;
@@ -105,7 +113,7 @@ body {
     font-size: 1.8rem; /* Zmenšení písma, aby se vešlo */
     color: var(--accent-color, #000000);
     margin: 0 0 10px 0;
-    line-height: 1.2;
+    line-height: 1.5;
 }
 
 /* Odsazení odstavce */
