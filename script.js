@@ -264,7 +264,7 @@ function addSparklesToText(elementId) {
 addSparklesToText("reveal-text");
 addSparklesToText("initials");
 addSparklesToText("wedding-date");
-
+addSparklesToText("main-title");
 
 
 // Funkce pro otevření detailů pozvánky po kliknutí na tlačítko
