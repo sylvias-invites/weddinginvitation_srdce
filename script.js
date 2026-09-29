@@ -57,7 +57,7 @@ function initCanvas() {
             offsetY = 0;
         }
 
-        // 1. Vytvoření zlatého/růžového podkladu v paměti
+        // 1. Vytvoření podkladu v paměti
         const goldCanvas = document.createElement("canvas");
         goldCanvas.width = canvas.width;
         goldCanvas.height = canvas.height;
@@ -67,7 +67,7 @@ function initCanvas() {
         // Vykreslení srdce se správným poměrem stran
         gCtx.drawImage(heartImg, offsetX, offsetY, drawWidth, drawHeight);
         gCtx.globalCompositeOperation = "source-in";
-        gCtx.fillStyle = "#ffe7eb";
+        gCtx.fillStyle = "#d2e5ef";
         gCtx.fillRect(0, 0, w, h);
 
         // 2. Nastavení podkladu pro text
@@ -201,8 +201,8 @@ function revealEverything() {
                 particleCount: 12,
                 spread: 60,
                 origin: { x: 0.2, y: 0.6 }, // Výstřel zleva
-                colors: ['#cb7f8c', '#ffdce2', '#5B7065', '#ffffff'],
-                shapes: ['heart', diamond],
+                colors: ['#c0eeff', '#cdd6d5', '#749483', '#ffffff'],
+                shapes: ['heart'],
                 scalar: 1.2
             });
 
