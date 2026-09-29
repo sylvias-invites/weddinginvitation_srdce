@@ -3,6 +3,7 @@ const ctx = canvas.getContext("2d");
 const container = document.querySelector(".heart-container");
 const instruction = document.getElementById("instruction");
 const nextBtn = document.getElementById("next-btn");
+const calendarBtn = document.getElementById("calendar-btn");
 
 // Zabránění nechtěnému označování nebo přetahování plátna
 canvas.addEventListener('dragstart', (e) => e.preventDefault());
@@ -242,6 +243,39 @@ function revealEverything() {
         }
     }, 800);
 }
+
+function addSparklesToText(elementId) {
+    const element = document.getElementById(elementId);
+    if (!element) return;
+
+    setInterval(() => {
+        const sparkle = document.createElement("div");
+        sparkle.className = "sparkle";
+
+        // N�hodn� pozice v r�mci textu
+        const rect = element.getBoundingClientRect();
+        const x = Math.random() * rect.width;
+        const y = Math.random() * rect.height;
+
+        sparkle.style.left = (rect.left + window.scrollX + x) + "px";
+        sparkle.style.top = (rect.top + window.scrollY + y) + "px";
+
+        // N�hodn� animace
+        sparkle.style.animation = `sparkleAnim ${Math.random() * 0.5 + 0.5}s linear forwards`;
+
+        document.body.appendChild(sparkle);
+
+        // Odstran�n� jiskry po animaci
+        setTimeout(() => sparkle.remove(), 1000);
+    }, 150); // Jak rychle se jiskry objevuj� (men�� ��slo = v�c jisk�en�)
+}
+
+// Spust�me jisk�en� pro nadpis a instrukce
+addSparklesToText("reveal-text");
+addSparklesToText("initials");
+addSparklesToText("wedding-date");
+
+
 
 // Funkce pro otevření detailů pozvánky po kliknutí na tlačítko
 function openDetails() {
